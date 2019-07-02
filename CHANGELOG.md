@@ -1,3 +1,3 @@
 ## 0.1.0
 
-* Android integration.
+* Initial release. Working on Android only.
