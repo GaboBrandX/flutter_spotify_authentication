@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter_spotify_authentication/flutter_spotify_authentication.dart';
-import 'package:flutter_spotify_authentication/spotify_connection_result.dart';
+import 'package:flutter_spotify_authentication/spotify_authentication_response.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         'user-library-read',
       ],
     );
-    if (result.responseType == SpotifyResponseType.success) {
+    if (result.responseType == SpotifyAuthenticationResponseType.token) {
       setState(() => _token = result.accessToken);
     }
   }

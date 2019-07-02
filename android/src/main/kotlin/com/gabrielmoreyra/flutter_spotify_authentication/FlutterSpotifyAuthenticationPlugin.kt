@@ -52,14 +52,15 @@ class FlutterSpotifyAuthenticationPlugin(private val activity: Activity): Method
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
     if (requestCode == requestCode){
       val response = AuthenticationClient.getResponse(resultCode, data)
-      when (response.type) {
-        AuthenticationResponse.Type.TOKEN -> channelResult?.success(response.accessToken)
-        AuthenticationResponse.Type.ERROR -> channelResult?.success(response.error)
-        AuthenticationResponse.Type.CODE -> channelResult?.success("code")
-        AuthenticationResponse.Type.EMPTY -> channelResult?.success("empty")
-        AuthenticationResponse.Type.UNKNOWN -> channelResult?.success("unknown")
-        else -> channelResult?.success("es null")
-      }
+      val responseMap: Map<String, Any?> = mapOf(
+              Pair("responseType", response.type.ordinal),
+              Pair("accessToken", response.accessToken),
+              Pair("state", response.state),
+              Pair("code", response.code),
+              Pair("error", response.error),
+              Pair("expiresIn", response.expiresIn)
+      )
+      channelResult?.success(responseMap)
       return true
     }
     return false
