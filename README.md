@@ -36,3 +36,8 @@ Than you can implement it with this code:
 ```
 
 The SpotifyAuthenticationResponse contains the `accessToken` in case of successful operation.
+
+## Future updates
+
+I'm working on iOS integration for now.
+
