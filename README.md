@@ -1,7 +1,38 @@
 # flutter_spotify_authentication
 
-Spotify Authentication Library integration for obtaining OAuth access tokens that can be used to play music or in calls to the Spotify Web API.
+This plugin is a bridge between the Spotify Authentication SDK (only for Android by now) and Flutter. It allows you to authenticate your users using the Spotify app and receive OAuth access tokens for calls than can be used to play music or used in calls to the Spotify Web API.
 
-## Getting Started
+You can find more info on the [Spotify for Devevelopers docs](https://developer.spotify.com/documentation/android/).
 
-This Flutter plugin is still under development.
+## How to use
+
+Add this activity to your AndroidManifest.xml
+
+```
+<activity
+  android:name="com.spotify.sdk.android.authentication.LoginActivity"
+  android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+```
+
+Than you can implement it with this code:
+
+```
+  connectToSpotify() async {
+    FlutterSpotifyAuthentication spotifyAuthentication = FlutterSpotifyAuthentication();
+    SpotifyAuthenticationResponse result = await spotifyAuthentication.connectToSpotifyAndReturnToken(
+      'YOUR_CLIENT_ID',
+      // Pass your needed scopes
+      [
+        'streaming',
+        'user-read-private',
+        'user-read-email',
+        'user-read-recently-played',
+        'user-follow-read',
+        'user-top-read',
+        'user-library-read',
+      ],
+    );
+  }
+```
+
+The SpotifyAuthenticationResponse contains the `accessToken` in case of successful operation.
